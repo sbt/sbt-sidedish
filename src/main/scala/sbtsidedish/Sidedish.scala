@@ -5,11 +5,17 @@ import Keys._
 
 case class Sidedish(id: String, location: File, scalaVersion0: String,
   modules: Seq[ModuleID], mainClass: String) {
+
+  private val publishSigned = taskKey[Unit]("Publishing all artifacts, but SIGNED using PGP.")
+
   def project: Project =
     Project(id, location).
       settings(
         scalaVersion := scalaVersion0,
-        libraryDependencies ++= modules
+        libraryDependencies ++= modules,
+        publish := (),
+        publishLocal := (),
+        publishSigned := ()
       )
 
   val projectRef: ProjectReference = LocalProject(id)
