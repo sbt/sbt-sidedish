@@ -13,9 +13,9 @@ case class Sidedish(id: String, location: File, scalaVersion0: String,
       settings(
         scalaVersion := scalaVersion0,
         libraryDependencies ++= modules,
-        publish := (),
-        publishLocal := (),
-        publishSigned := ()
+        publish := {},
+        publishLocal := {},
+        publishSigned := {}
       )
 
   val projectRef: ProjectReference = LocalProject(id)
@@ -29,13 +29,15 @@ case class Sidedish(id: String, location: File, scalaVersion0: String,
 
   def forkRunTask(workingDirectory: File, jvmOptions: Seq[String], args: Seq[String]): Def.Initialize[Task[Unit]] =
     Def.task {
-      val fo = ForkOptions(bootJars = Nil,
+      val fo = ForkOptions(
         javaHome = (javaHome in projectRef).value,
-        connectInput = (connectInput in projectRef).value,
         outputStrategy = (outputStrategy in projectRef).value,
-        runJVMOptions = jvmOptions,
+        bootJars = Vector.empty,
         workingDirectory = Option(workingDirectory),
-        envVars = (envVars in projectRef).value)
+        runJVMOptions = jvmOptions.toVector,
+        connectInput = (connectInput in projectRef).value,
+        envVars = (envVars in projectRef).value
+      )
       val r = new ForkRun(fo)
       (runner in (projectRef, Compile, run)).value
       val cp = (fullClasspath in (projectRef, Compile, run)).value
