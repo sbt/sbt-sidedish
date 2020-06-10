@@ -1,4 +1,4 @@
-ThisBuild / version := "0.1.1"
+ThisBuild / version := "0.2.1-SNAPSHOT"
 ThisBuild / organization := "com.eed3si9n"
 ThisBuild / publishMavenStyle := false
 ThisBuild / description := "a tool to write plugin that downloads and runs an app"
