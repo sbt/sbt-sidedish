@@ -15,7 +15,8 @@ case class Sidedish(id: String, location: File, scalaVersion0: String,
         libraryDependencies ++= modules,
         publish := {},
         publishLocal := {},
-        publishSigned := {}
+        publishSigned := {},
+        publish / skip := true,
       )
 
   val projectRef: ProjectReference = LocalProject(id)

@@ -4,7 +4,7 @@ dist: xenial
 jdk: openjdk8
 
 script:
-  - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test scripted
+  - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
 
 before_cache:
   - find $HOME/.cache/coursier/v1 -name "ivydata-*.properties" -delete
