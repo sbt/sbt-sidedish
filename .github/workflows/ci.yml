@@ -36,6 +36,7 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java }}
           cache: "sbt"
+      - uses: sbt/setup-sbt@v1
 
       - name: Build and test (Scala 2.12.*)
         if: ${{ matrix.jobtype == 1 }}
